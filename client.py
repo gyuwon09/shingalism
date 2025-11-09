@@ -130,7 +130,7 @@ while program_running:
                     screen.blit(title, title_rect)
                     pygame.display.flip()
 
-                # 페이지 1: 촬영 안내 및 6장 촬영
+                # 페이지 1: 프레임 선택택
                 elif page == 1:
                     if in_collab_page == 0:
                         page_is_available = True
@@ -810,4 +810,5 @@ while program_running:
             error = True
 
 pygame.quit()
+
 cap.release()
