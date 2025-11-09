@@ -4,24 +4,23 @@ import subprocess
 
 
 def make_film(path1: str, path2: str, path3: str, path4: str, frame: str, index_num: int):
-    #캔버스 설정
+    #캔버스 사이즈
     canvas_width = 800
     canvas_height = 2400
     canvas = Image.new("RGBA", (canvas_width, canvas_height), (255, 255, 255, 255))
 
     path_list = [path1, path2, path3, path4]
-    y_setting = [218, 750, 1282, 1814]  # 각 이미지의 Y좌표
+    y_setting = [218, 750, 1282, 1814]  #Y좌표 기준
 
     for idx, path in enumerate(path_list):
         #이미지 열기 및 리사이즈
-        img = Image.open(path).convert("RGBA")  # 항상 RGBA로 변환
+        img = Image.open(path).convert("RGBA")
         img = img.resize((624, 468), Image.LANCZOS)
 
         #붙일 위치 계산
         x = (canvas_width - 624) // 2
         y = y_setting[idx]
-
-        #투명 PNG도 정상적으로 붙이기
+        
         canvas.paste(img, (x, y), mask=img)
 
     #프레임 이미지 붙이기
@@ -29,7 +28,7 @@ def make_film(path1: str, path2: str, path3: str, path4: str, frame: str, index_
     frame_img = frame_img.resize((canvas_width, canvas_height), Image.LANCZOS)
     canvas.paste(frame_img, (0, 0), mask=frame_img)
 
-    #결과 폴더 확인 및 저장
+    #저장
     output_dir = "photo"
     os.makedirs(output_dir, exist_ok=True)
 
@@ -85,3 +84,4 @@ def make_2(img):
 
 
 # make_2(r"C:\gyuwon\personal\personal\Python\shingal_4cut\photo\0.png")
+
